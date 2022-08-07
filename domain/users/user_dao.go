@@ -1,6 +1,7 @@
 package users
 
 import (
+	"bookstoreUsersApi/utils/date_utils"
 	"bookstoreUsersApi/utils/errors"
 	"fmt"
 )
@@ -32,6 +33,9 @@ func (user *User) Save() *errors.RestErr {
 		}
 		return errors.NewBadRequestError(fmt.Sprintf("user %d already exists", user.Id))
 	}
+
+	user.CreatedAt = date_utils.GetNowString()
+
 	usersDB[user.Id] = user
 	return nil
 }
