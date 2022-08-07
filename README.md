@@ -1,2 +1,5 @@
 # bookstore_users-api
-Users Api
+#### Users Api
+
+**DAO** and **DTO** Design Patterns
+**MVC** Design Patterns
