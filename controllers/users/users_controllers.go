@@ -83,7 +83,13 @@ func Delete(c *gin.Context) {
 }
 
 func Search(c *gin.Context) {
-	c.String(http.StatusNotImplemented, "not implemented!")
+	status := c.Query("status")
+	data, err := services.Search(status)
+	if err != nil {
+		c.JSON(err.Status, err)
+		return
+	}
+	c.JSON(http.StatusOK, data)
 }
 
 func getUserId(userIdParam string) (int64, *errors.RestErr) {
