@@ -14,6 +14,8 @@ type User struct {
 }
 
 func (user *User) Validate() *errors.RestErr {
+	user.FirstName = strings.TrimSpace(user.FirstName)
+	user.LastName = strings.TrimSpace(user.LastName)
 	// if user.FirstName == "" {
 	// 	return errors.New("first name is required")
 	// }
