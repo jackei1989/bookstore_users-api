@@ -1,4 +1,4 @@
-# bookstore_users-api
+# Bookstore User's API
 
 **DAO** and **DTO** Design Patterns
 

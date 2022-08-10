@@ -2,6 +2,7 @@ package bootstrap
 
 import (
 	"github.com/gin-gonic/gin"
+	"log"
 )
 
 var (
@@ -10,5 +11,7 @@ var (
 
 func BootApplication() {
 	mapUrls()
-	router.Run(":8080")
+	if err := router.Run(":8080"); err != nil {
+		log.Print(err)
+	}
 }
