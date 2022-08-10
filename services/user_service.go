@@ -31,7 +31,7 @@ func UpdateUser(isPartial bool, user users.User) (*users.User, *errors.RestErr) 
 	if err != nil {
 		return nil, err
 	}
-	
+
 	if isPartial {
 		if user.FirstName != "" {
 			current.FirstName = user.FirstName
@@ -53,4 +53,9 @@ func UpdateUser(isPartial bool, user users.User) (*users.User, *errors.RestErr) 
 	}
 
 	return current, nil
+}
+
+func DeleteUser(userId int64) *errors.RestErr {
+	user := &users.User{Id: userId}
+	return user.Delete()
 }

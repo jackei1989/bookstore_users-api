@@ -3,8 +3,10 @@ package bootstrap
 import "bookstoreUsersApi/controllers/users"
 
 func mapUrls() {
-	router.GET("/users/:user_id", users.GetUser)
-	router.GET("/users/search", users.SearchUser)
-	router.POST("/users", users.CreateUser)
-	router.PUT("/users/:user_id", users.UpdateUser)
+	router.GET("/users/:user_id", users.Get)
+	router.GET("/users/search", users.Search)
+	router.POST("/users", users.Create)
+	router.PUT("/users/:user_id", users.Update)
+	router.PATCH("/users/:user_id", users.Update)
+	router.DELETE("/users/:user_id", users.Delete)
 }

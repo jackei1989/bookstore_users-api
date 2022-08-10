@@ -9,9 +9,10 @@ import (
 )
 
 const (
-	QUERYINSERTUSER  = "INSERT INTO users(first_name, last_name, email, created_at) VALUES(?, ?, ?, ?);"
-	QUERYGETUSER     = "SELECT id, first_name, last_name, email, created_at FROM users WHERE id = ?"
-	QUEERYUPDATEUSER = "UPDATE users SET first_name=?, last_name=?, email=? WHERE id=?"
+	QUERYINSERTUSER = "INSERT INTO users(first_name, last_name, email, created_at) VALUES(?, ?, ?, ?);"
+	QUERYGETUSER    = "SELECT id, first_name, last_name, email, created_at FROM users WHERE id = ?"
+	QUERYUPDATEUSER = "UPDATE users SET first_name=?, last_name=?, email=? WHERE id=?"
+	QUERYDELETEUSER = "DELETE FROM users WHERE id=?"
 )
 
 func (user *User) Get() *errors.RestErr {
@@ -56,7 +57,7 @@ func (user *User) Save() *errors.RestErr {
 }
 
 func (user *User) Update() *errors.RestErr {
-	stmt, err := bookstores_users_db.Client.Prepare(QUEERYUPDATEUSER)
+	stmt, err := bookstores_users_db.Client.Prepare(QUERYUPDATEUSER)
 	if err != nil {
 		errors.NewInternalServerError(err.Error())
 	}
@@ -66,6 +67,20 @@ func (user *User) Update() *errors.RestErr {
 
 	_, err = stmt.Exec(user.FirstName, user.LastName, user.Email, user.Id)
 	if err != nil {
+		return mysql_utils.ParsError(err)
+	}
+	return nil
+}
+
+func (user *User) Delete() *errors.RestErr {
+	stmt, err := bookstores_users_db.Client.Prepare(QUERYDELETEUSER)
+	if err != nil {
+		errors.NewInternalServerError(err.Error())
+	}
+	defer func() {
+		err = stmt.Close()
+	}()
+	if _, err = stmt.Exec(user.Id); err != nil {
 		return mysql_utils.ParsError(err)
 	}
 	return nil
