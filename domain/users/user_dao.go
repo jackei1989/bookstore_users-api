@@ -2,7 +2,6 @@ package users
 
 import (
 	"bookstoreUsersApi/datasources/mysql/bookstores_users_db"
-	"bookstoreUsersApi/utils/date_utils"
 	"bookstoreUsersApi/utils/errors"
 	"bookstoreUsersApi/utils/mysql_utils"
 	"fmt"
@@ -40,8 +39,6 @@ func (user *User) Save() *errors.RestErr {
 	defer func() {
 		err = stmt.Close()
 	}()
-
-	user.CreatedAt = date_utils.GetNowDBFormat()
 
 	insertResult, saveErr := stmt.Exec(user.FirstName, user.LastName, user.Email, user.Password, user.Status, user.CreatedAt)
 	if saveErr != nil {
