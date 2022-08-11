@@ -9,8 +9,8 @@ import (
 )
 
 const (
+	QUERYGETUSER      = "SELECT id, first_name, last_name, email,password, status, created_at FROM users WHERE id = ?"
 	QUERYINSERTUSER   = "INSERT INTO users(first_name, last_name, email, password, status, created_at) VALUES(?, ?, ?, ?, ?, ?);"
-	QUERYGETUSER      = "SELECT id, first_name, last_name, email, status, created_at FROM users WHERE id = ?"
 	QUERYUPDATEUSER   = "UPDATE users SET first_name=?, last_name=?, email=? WHERE id=?"
 	QUERYDELETEUSER   = "DELETE FROM users WHERE id=?"
 	QUERYFINDBYSTATUS = "SELECT id, first_name, last_name, email, password, status, created_at FROM users WHERE status=?;"
