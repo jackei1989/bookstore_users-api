@@ -4,10 +4,9 @@ import (
 	"bookstoreUsersApi/domain/users"
 	"bookstoreUsersApi/services"
 	"bookstoreUsersApi/utils/errors"
+	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
-
-	"github.com/gin-gonic/gin"
 )
 
 func Get(c *gin.Context) {
